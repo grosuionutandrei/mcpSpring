@@ -1,0 +1,18 @@
+# Central place for all external URLs.
+# Imported from application.properties via spring.config.import.
+# Default values below are used by the dev profile.
+
+urls:
+  projects-api: http://localhost:8088
+
+---
+spring:
+  config:
+    activate:
+      on-profile: staging, prod, dev
+
+urls:
+  base: ${PROJECTS_API_URL:http://localhost:8088}
+  projects-api: ${PROJECTS_API_URL:/api/v1/projects/projects/{organizationId}}
+  tasks-api: ${TAKS_API_URL:/api/v1/tasks/task/project/{projectId}}
+  organization-api: ${ORGANIZATION_API_URL:/api/v1/organizations/{organizationId}/exists}

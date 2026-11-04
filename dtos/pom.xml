@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>dk.timer</groupId>
+		<artifactId>mcp</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>dtos</artifactId>
+	<name>dtos</name>
+	<description>DTOs generated from the projects API OpenAPI spec</description>
+
+	<dependencies>
+		<!-- the generated models use Jackson and jakarta.annotation (@Nullable/@Nonnull) annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>projects-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/openapi/projects-api.json</inputSpec>
+							<!-- projects API spec declares {id} paths without path parameters -->
+							<skipValidateSpec>true</skipValidateSpec>
+							<generatorName>java</generatorName>
+							<library>restclient</library>
+							<modelPackage>dk.timer.mcp.tools.model</modelPackage>
+							<generateApis>false</generateApis>
+							<generateModelTests>false</generateModelTests>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<configOptions>
+								<useJakartaEe>true</useJakartaEe>
+								<openApiNullable>false</openApiNullable>
+								<annotationLibrary>none</annotationLibrary>
+								<dateLibrary>java8</dateLibrary>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

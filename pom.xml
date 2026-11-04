@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.1.2</version>
+		<relativePath/>
+	</parent>
+	<groupId>dk.timer</groupId>
+	<artifactId>mcp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>mcp</name>
+	<description>Timer MCP parent project</description>
+
+	<modules>
+		<module>dtos</module>
+		<module>mcpServer</module>
+		<module>adapters</module>
+		<module>ports</module>
+		<module>app</module>
+	</modules>
+
+	<properties>
+		<java.version>25</java.version>
+		<spring-ai.version>2.0.1</spring-ai.version>
+		<openapi-generator.version>7.14.0</openapi-generator.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.ai</groupId>
+				<artifactId>spring-ai-bom</artifactId>
+				<version>${spring-ai.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- internal modules -->
+			<dependency>
+				<groupId>dk.timer</groupId>
+				<artifactId>ports</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dk.timer</groupId>
+				<artifactId>adapters</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dk.timer</groupId>
+				<artifactId>mcpServer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dk.timer</groupId>
+				<artifactId>dtos</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.openapitools</groupId>
+					<artifactId>openapi-generator-maven-plugin</artifactId>
+					<version>${openapi-generator.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>default-compile</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+							<configuration>
+								<annotationProcessorPaths>
+									<path>
+										<groupId>org.projectlombok</groupId>
+										<artifactId>lombok</artifactId>
+									</path>
+								</annotationProcessorPaths>
+							</configuration>
+						</execution>
+						<execution>
+							<id>default-testCompile</id>
+							<phase>test-compile</phase>
+							<goals>
+								<goal>testCompile</goal>
+							</goals>
+							<configuration>
+								<annotationProcessorPaths>
+									<path>
+										<groupId>org.projectlombok</groupId>
+										<artifactId>lombok</artifactId>
+									</path>
+								</annotationProcessorPaths>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
