@@ -25,5 +25,4 @@ public class OrganizationToolsImpl implements OrganizationTools {
         }
         return "Organization does not exists in the system";
     }
-
 }

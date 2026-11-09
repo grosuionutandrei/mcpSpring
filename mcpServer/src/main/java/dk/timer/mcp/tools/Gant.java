@@ -17,6 +17,7 @@ import java.util.List;
 public class Gant  implements ProjectTools {
     private final Projects projectPort;
     private final Tasks tasksPort;
+
     @McpTool(name = "getProjectsByOrganizationId",
             description = "Get the names of the active projects of an existing organization, by organization id",
             annotations = @McpTool.McpAnnotations(

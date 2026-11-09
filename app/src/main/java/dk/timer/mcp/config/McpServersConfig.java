@@ -62,6 +62,8 @@ public class McpServersConfig {
         List<Object> projectPrompts = projectPromptsProvider.stream().map(Object.class::cast).toList();
         return McpServer.sync(transport)
                 .serverInfo("timer-projects", "1.0.0")
+                // Run tools on the servlet request thread so the SecurityContext (JWT) is visible
+                .immediateExecution(true)
                 .instructions("Look up the projects of an organization and the tasks of a project.")
                 .capabilities(McpSchema.ServerCapabilities.builder()
                         .tools(false)
@@ -96,6 +98,7 @@ public class McpServersConfig {
             TimerTools timerTools) {
         return McpServer.sync(transport)
                 .serverInfo("timer-timers", "1.0.0")
+                .immediateExecution(true)
                 .instructions("Start and manage timers.")
                 .capabilities(toolsOnly())
                 .tools(new SyncStatelessMcpToolProvider(List.of(timerTools)).getToolSpecifications())
@@ -127,6 +130,7 @@ public class McpServersConfig {
         List<Object> projectPrompts = organizationPromptsProvider.stream().map(Object.class::cast).toList();
         return McpServer.sync(transport)
                 .serverInfo("timer-organization", "1.0.0")
+                .immediateExecution(true)
                 .instructions("Look up if an organization exists, create, delete, update, organizations")
                 .capabilities(McpSchema.ServerCapabilities.builder()
                         .tools(false)

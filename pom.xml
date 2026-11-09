@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>dk.timer</groupId>
 	<artifactId>mcp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1.1</version>
 	<packaging>pom</packaging>
 	<name>mcp</name>
 	<description>Timer MCP parent project</description>
@@ -27,6 +27,7 @@
 		<java.version>25</java.version>
 		<spring-ai.version>2.0.1</spring-ai.version>
 		<openapi-generator.version>7.14.0</openapi-generator.version>
+		<mcp-server-security.version>0.1.14</mcp-server-security.version>
 	</properties>
 
 	<dependencyManagement>
@@ -37,6 +38,11 @@
 				<version>${spring-ai.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springaicommunity</groupId>
+				<artifactId>mcp-server-security</artifactId>
+				<version>${mcp-server-security.version}</version>
 			</dependency>
 			<!-- internal modules -->
 			<dependency>
